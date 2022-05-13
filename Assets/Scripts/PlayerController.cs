@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,23 +7,24 @@ using Unity.Mathematics;
 
 public class PlayerController : MonoBehaviour
 {
-    
+    private GameInputs _input;
+    private InputAction _moveAction;
+    private InputAction _lookAction;
     
     private Vector2 _moveInput;
     private Vector2 _lookInput;
     private Vector3 _lastInput;
 
-    private quaternion _characterTargetRotation;
-    private Vector2 _cameraRotation;
+    private Vector3 _leftArmOffset, _rightArmOffset, _backpackOffset;
     
-    private GameInputs _input;
-    private InputAction _moveAction;
-    private InputAction _lookAction;
+    [Header("References")]
+    public CharacterController charControl;
+    public Transform affectedTransform;
+    [SerializeField] private Transform leftArm;
+    [SerializeField] private Transform rightArm;
+    [SerializeField] private Transform backPack;
     
-    private CharacterController _charControl;
-
-    private Interactable _selectedInteractable;
-
+    
     [Header("Camera")] 
     [SerializeField] private Transform cameraTarget;
 
@@ -36,6 +36,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] [MinMaxSlider(-89f, 89f)]
     private Vector2 verticalCameraRotationClamp;
+    
+    private Quaternion _characterTargetRotation;
+    private Vector2 _cameraRotation;
 
     [Header("Mouse")] 
     [ProgressBar(0,5f)]
@@ -48,58 +51,223 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool invertY = false;
     [SerializeField] private bool invertX = false;
 
-    [Header(("Movement"))] 
-    [SerializeField][MinValue(0)] private float moveSpeed = 3f;
-    [SerializeField][MinValue(0)] private float rotationSpeed = 3f;
-    [SerializeField] private AnimationCurve MovementCurve;
-    [SerializeField] private float timeTillMaxMoveCurve;
-    private float currentMoveCurve;
-    [SerializeField] private Animator playerAnimator;
-    [SerializeField] private float accelerationMult;
-    [SerializeField] private float decelerationMult;
+    [Header("Movement")] 
+    [SerializeField] private float movementSpeed;
+    [SerializeField] private float rotationSpeed;
+    [SerializeField] private float acceleration, decceleration;
+    [SerializeField] private float topSpeedWalking, topSpeedRunning, topSpeedGliding, topSpeedBackwards;
+    [SerializeField] private MovementState moveState;
+    [SerializeField] private bool backingUp;
+    private enum MovementState
+    {
+        Walking,
+        Running,
+        Gliding
+    }
     
-    private void Awake()
+    private Vector3 _currentVelocity;
+    
+    void Awake()
     {
         _input = new GameInputs();
         _moveAction = _input.Player.Move;
         _lookAction = _input.Player.Look;
-
-        _input.Player.Interact.performed += Interact;
         
-        _charControl = GetComponent<CharacterController>();
-    }
+        _leftArmOffset = affectedTransform.position - leftArm.position;
+        _rightArmOffset = affectedTransform.position - rightArm.position;
+        _backpackOffset = affectedTransform.position - backPack.position;
 
+        Application.targetFrameRate = -1;
+    }
+    
     private void OnEnable()
     {
         _input.Enable();
-    }
-
-    private void Update()
-    {
-        _moveInput = _moveAction.ReadValue<Vector2>();
-        _lookInput = _lookAction.ReadValue<Vector2>();
-        Move(_moveInput);
-        playerAnimator.SetBool("Grounded", _charControl.isGrounded);
-
-    }
-
-    private void FixedUpdate()
-    {
-    }
-
-    private void LateUpdate()
-    {
-        RotateCamera(_lookInput);
     }
 
     private void OnDisable()
     {
         _input.Disable();
     }
+    
 
-    private void OnDestroy()
+    private void Update()
     {
+        _moveInput = _moveAction.ReadValue<Vector2>();
+        _lookInput = _lookAction.ReadValue<Vector2>();
         
+        var angle = AngleToMovement();
+
+        switch (angle)
+        {
+            case < 30 and > -30:
+                WalkMove(_moveInput, movementSpeed);
+                RotateToInput(angle);
+                backingUp = false;
+
+                break;
+            case < 90 and > -90:
+                WalkMove(_moveInput, movementSpeed / 2);
+                RotateToInput(angle);
+                backingUp = false;
+
+                break;
+            case < 160 and > -160:
+                BreakVelocity();
+                RotateToInput(angle);
+                backingUp = false;
+
+                break;
+            case < 180 and > -180:
+
+                if (Vector3.Angle(_currentVelocity, affectedTransform.forward) > 160 || _currentVelocity == Vector3.zero)
+                {
+                    WalkMove(_moveInput, - movementSpeed / 2);
+                    backingUp = true;
+                }
+                else
+                {
+                    BreakVelocity();
+                }
+
+                break;
+        }
+        
+        LeanCharacterToVelocity();
+        VelocityCalc();
+        MoveAttachments();
+        RotateCamera(_lookInput);
+    }
+
+
+    private void MoveAttachments()
+    {
+        leftArm.position = affectedTransform.position + _leftArmOffset;
+        rightArm.position = affectedTransform.position + _rightArmOffset;
+        backPack.position = affectedTransform.position + _backpackOffset;
+
+    }
+
+    private float AngleToMovement()
+    {
+        var movement = WorldDirectionMoveInput(_moveInput);
+        var bodyDirection = affectedTransform.forward;
+        
+        bodyDirection.y = 0;
+        bodyDirection.Normalize();
+        
+        var angle = Vector3.Angle(movement,bodyDirection);
+        var direction = Vector3.Cross(movement, bodyDirection).y;
+
+        if (direction > 0) direction = 1;
+        if (direction < 0) direction = -1;
+
+        angle *= direction;
+        
+        return angle; 
+    }
+
+    private void RotateToInput(float angle)
+    {
+        if (angle > 1f)
+        {
+            affectedTransform.RotateAround(affectedTransform.position, Vector3.up, -rotationSpeed * Time.deltaTime);
+        }else if (angle < -1f)
+        {
+            affectedTransform.RotateAround(affectedTransform.position, Vector3.up, rotationSpeed * Time.deltaTime);
+        }
+    }
+
+    private void LeanCharacterToVelocity()
+    {
+        var bodyDirection = affectedTransform.forward;
+        
+        bodyDirection.y = 0;
+        bodyDirection.Normalize();
+        
+        var angle = Vector3.Angle(_currentVelocity, bodyDirection);
+        
+        var veloForwardMult = Vector3.Angle(_currentVelocity, affectedTransform.right);
+        var direction = Vector3.Cross(_currentVelocity, bodyDirection).y;
+
+        if (direction > 0) direction = 0;
+        if (direction < 0) direction = -180;
+
+        veloForwardMult += direction;
+        veloForwardMult /= 90;
+        veloForwardMult = Mathf.Abs(veloForwardMult);
+        veloForwardMult -= 2;
+        veloForwardMult = Mathf.Abs(veloForwardMult);
+
+        if (veloForwardMult == 2) veloForwardMult = 0;
+        Debug.Log(veloForwardMult);
+        
+        if (angle > 90)
+        {
+            affectedTransform.rotation = Quaternion.Euler(-_currentVelocity.magnitude * veloForwardMult * 2,affectedTransform.eulerAngles.y,affectedTransform.eulerAngles.z);
+        }
+        else
+        {
+            affectedTransform.rotation = Quaternion.Euler(_currentVelocity.magnitude* veloForwardMult * 2,affectedTransform.eulerAngles.y,affectedTransform.eulerAngles.z);
+        }
+    }
+
+    private void BreakVelocity()
+    {
+        var decc = moveState == MovementState.Gliding  ? decceleration * 0.1f : decceleration;
+        var deccelerationForce = _currentVelocity.normalized * decc * Time.deltaTime;
+        if (deccelerationForce.magnitude > _currentVelocity.magnitude) deccelerationForce = _currentVelocity;
+        if(_currentVelocity.magnitude > 0.05f) _currentVelocity -= deccelerationForce;
+        else _currentVelocity = Vector3.zero;
+    }
+
+    private void WalkMove(Vector2 moveInput, float moveSpeed)
+    {
+        //Input to RelativeInput
+        var bodyDirection = affectedTransform.forward;
+        
+        bodyDirection.y = 0;
+        bodyDirection.Normalize();
+        //- Input to RelativeInput
+
+        if (moveInput != Vector2.zero)
+        {
+            _currentVelocity += bodyDirection * acceleration * Time.deltaTime * moveSpeed;
+        }
+        else
+        {
+            BreakVelocity();
+        }
+
+    }
+
+    private void VelocityCalc()
+    {
+        var velocityCap = backingUp ? topSpeedBackwards : moveState == MovementState.Walking ? topSpeedWalking : moveState == MovementState.Running ? topSpeedRunning : topSpeedGliding;
+        
+        if (_currentVelocity.magnitude > velocityCap)
+        {
+            _currentVelocity.Normalize();
+            _currentVelocity *= velocityCap;
+        }
+
+        if (_currentVelocity.magnitude > 0) _characterTargetRotation = Quaternion.LookRotation(_currentVelocity, Vector3.up);
+
+
+
+        charControl.SimpleMove(_currentVelocity);
+    }
+
+    private Vector3 WorldDirectionMoveInput(Vector2 moveInput)
+    {
+        Vector3 inputDir = new Vector3(moveInput.x, 0, moveInput.y).normalized;
+        Vector3 worldInputDir = cameraTarget.TransformDirection(inputDir);
+        worldInputDir.y = 0;
+        worldInputDir.Normalize();
+
+        if (worldInputDir != Vector3.zero) _lastInput = worldInputDir;
+        Vector3 movement = _lastInput;
+        return movement;
     }
 
     private void RotateCamera(Vector2 lookInput)
@@ -133,46 +301,16 @@ public class PlayerController : MonoBehaviour
 
     private bool IsMouseLook()
     {
+        if (_lookAction.activeControl == null)
+        {
+            Debug.LogWarning("No active control scheme detected");
+            return false;
+        }
+        
         bool isMouseInput = _lookAction.activeControl.name == "delta";
         return isMouseInput;
     }
-
-    private void Move(Vector2 moveInput)
-    {
-        playerAnimator.SetFloat("Speed",MovementCurve.Evaluate(currentMoveCurve / timeTillMaxMoveCurve));
-        
-        Vector3 inputDir = new Vector3(moveInput.x, 0, moveInput.y).normalized;
-        Vector3 worldInputDir = cameraTarget.TransformDirection(inputDir);
-        worldInputDir.y = 0;
-        worldInputDir.Normalize();
-
-        if (worldInputDir != Vector3.zero)
-            _lastInput = worldInputDir;
-        Vector3 movement = _lastInput * moveSpeed * MovementCurve.Evaluate(currentMoveCurve / timeTillMaxMoveCurve);
-
-        _characterTargetRotation = Quaternion.LookRotation(_lastInput,Vector3.up);
-        transform.rotation = Quaternion.Slerp(transform.rotation, _characterTargetRotation, Time.deltaTime * rotationSpeed);
-        
-        if (moveInput != Vector2.zero)
-        {
-            
-            currentMoveCurve += accelerationMult * Time.deltaTime;
-
-            if (currentMoveCurve > timeTillMaxMoveCurve)
-                currentMoveCurve = timeTillMaxMoveCurve;
-        }
-        else
-        {
-            currentMoveCurve -= Time.deltaTime * decelerationMult;
-
-            if (currentMoveCurve < 0)
-                currentMoveCurve = 0;
-        }
-        
-        
-        _charControl.SimpleMove(movement);
-    }
-
+    
     private float NormalizeAngle(float angle)
     {
        
@@ -189,61 +327,5 @@ public class PlayerController : MonoBehaviour
         }
 
         return angle;
-    }
-
-    private void Interact(InputAction.CallbackContext ctx)
-    {
-        if (_selectedInteractable != null)
-        {
-            _selectedInteractable.Interact();
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        TrySelectInteractable(other);
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        TryDeselectInteractable(other);
-    }
-
-    private void TrySelectInteractable(Collider other)
-    {
-        Interactable interactable = other.GetComponent<Interactable>();
-        
-        if(interactable == null)
-            return;
-        
-        if(_selectedInteractable != null)
-            _selectedInteractable.Deselect();
-
-        _selectedInteractable = interactable;
-        interactable.Select();
-    }
-    
-    public void EnableInput()
-    {
-        _input.Enable();
-    }
-    
-    public void DisableInput()
-    {
-        _input.Disable();
-    }
-
-    private void TryDeselectInteractable(Collider other)
-    {
-        Interactable interactable = other.GetComponent<Interactable>();
-        
-        if(interactable == null)
-            return;
-
-        if (interactable == _selectedInteractable)
-        {
-            _selectedInteractable.Deselect();
-            _selectedInteractable = null;
-        }
     }
 }
