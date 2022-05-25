@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/HTK_Stuff/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/Menu.unity
+    guid: af62b0a364497a443887bd63b477ebf8
+  - enabled: 1
+    path: Assets/Scenes/Testing Scene.unity
+    guid: 2fc138d1779b83d45b33d5c0a14917cd
   m_configObjects: {}

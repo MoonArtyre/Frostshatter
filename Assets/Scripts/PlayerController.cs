@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 _lastInput;
 
     private Vector3 _leftArmOffset, _rightArmOffset, _backpackOffset;
+
+    private float _currentTopSpeed;
     
     [Header("References")]
     public CharacterController charControl;
@@ -54,10 +56,14 @@ public class PlayerController : MonoBehaviour
     [Header("Movement")] 
     [SerializeField] private float movementSpeed;
     [SerializeField] private float rotationSpeed;
-    [SerializeField] private float acceleration, decceleration;
+    [SerializeField] private float acceleration, runningAcceleration, decceleration;
     [SerializeField] private float topSpeedWalking, topSpeedRunning, topSpeedGliding, topSpeedBackwards;
     [SerializeField] private MovementState moveState;
     [SerializeField] private bool backingUp;
+    [SerializeField] private LayerMask groundMask;
+
+    [Header("Interactions")]
+    [SerializeField] private Interactable selectedInteractable;
     private enum MovementState
     {
         Walking,
@@ -72,7 +78,12 @@ public class PlayerController : MonoBehaviour
         _input = new GameInputs();
         _moveAction = _input.Player.Move;
         _lookAction = _input.Player.Look;
-        
+        _input.Player.Sprint.started += (InputAction.CallbackContext _) => { if (moveState == MovementState.Walking)  moveState = MovementState.Running; };
+        _input.Player.Sprint.canceled += (InputAction.CallbackContext _) => { if (moveState == MovementState.Running) moveState = MovementState.Walking; };
+
+        _input.Player.Interact.performed += Interact;
+
+
         _leftArmOffset = affectedTransform.position - leftArm.position;
         _rightArmOffset = affectedTransform.position - rightArm.position;
         _backpackOffset = affectedTransform.position - backPack.position;
@@ -93,6 +104,9 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        StickToGround();
+        ChangeTopSpeed();
+
         _moveInput = _moveAction.ReadValue<Vector2>();
         _lookInput = _lookAction.ReadValue<Vector2>();
         
@@ -139,7 +153,6 @@ public class PlayerController : MonoBehaviour
         RotateCamera(_lookInput);
     }
 
-
     private void MoveAttachments()
     {
         leftArm.position = affectedTransform.position + _leftArmOffset;
@@ -167,12 +180,26 @@ public class PlayerController : MonoBehaviour
         return angle; 
     }
 
+    private void ChangeTopSpeed()
+    {
+        float goalSpeed = moveState == MovementState.Walking ? topSpeedWalking : moveState == MovementState.Running ? topSpeedRunning : topSpeedGliding;
+
+        if (_currentTopSpeed < goalSpeed)
+            _currentTopSpeed += acceleration * Time.deltaTime;
+
+        if (_currentTopSpeed > goalSpeed)
+            _currentTopSpeed -= decceleration * Time.deltaTime;
+
+        if(Mathf.Abs(_currentTopSpeed - goalSpeed) < 0.5f)
+            _currentTopSpeed = goalSpeed;
+    }
+
     private void RotateToInput(float angle)
     {
-        if (angle > 1f)
+        if (angle > 4f)
         {
             affectedTransform.RotateAround(affectedTransform.position, Vector3.up, -rotationSpeed * Time.deltaTime);
-        }else if (angle < -1f)
+        }else if (angle < -4f)
         {
             affectedTransform.RotateAround(affectedTransform.position, Vector3.up, rotationSpeed * Time.deltaTime);
         }
@@ -200,7 +227,6 @@ public class PlayerController : MonoBehaviour
         veloForwardMult = Mathf.Abs(veloForwardMult);
 
         if (veloForwardMult == 2) veloForwardMult = 0;
-        Debug.Log(veloForwardMult);
         
         if (angle > 90)
         {
@@ -232,7 +258,7 @@ public class PlayerController : MonoBehaviour
 
         if (moveInput != Vector2.zero)
         {
-            _currentVelocity += bodyDirection * acceleration * Time.deltaTime * moveSpeed;
+            _currentVelocity += bodyDirection * (moveState == MovementState.Walking? acceleration : runningAcceleration) * Time.deltaTime * moveSpeed;
         }
         else
         {
@@ -243,7 +269,7 @@ public class PlayerController : MonoBehaviour
 
     private void VelocityCalc()
     {
-        var velocityCap = backingUp ? topSpeedBackwards : moveState == MovementState.Walking ? topSpeedWalking : moveState == MovementState.Running ? topSpeedRunning : topSpeedGliding;
+        var velocityCap = backingUp ? topSpeedBackwards : _currentTopSpeed;
         
         if (_currentVelocity.magnitude > velocityCap)
         {
@@ -256,6 +282,18 @@ public class PlayerController : MonoBehaviour
 
 
         charControl.SimpleMove(_currentVelocity);
+    }
+
+    private void StickToGround()
+    {
+        
+        float snapDistance = 1f;
+        if (charControl.isGrounded == false)
+        {
+            RaycastHit hitInfo = new RaycastHit();
+            if (Physics.Raycast(new Ray(affectedTransform.position, Vector3.down), out hitInfo, snapDistance))
+                charControl.Move(hitInfo.point - affectedTransform.position);
+        }
     }
 
     private Vector3 WorldDirectionMoveInput(Vector2 moveInput)
@@ -327,5 +365,61 @@ public class PlayerController : MonoBehaviour
         }
 
         return angle;
+    }
+
+    private void Interact(InputAction.CallbackContext ctx)
+    {
+        if (selectedInteractable != null)
+        {
+            selectedInteractable.Interact();
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        TrySelectInteractable(other);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        TryDeselectInteractable(other);
+    }
+
+    private void TrySelectInteractable(Collider other)
+    {
+        Interactable interactable = other.GetComponent<Interactable>();
+
+        if (interactable == null)
+            return;
+
+        if (selectedInteractable != null)
+            selectedInteractable.Deselect();
+
+        selectedInteractable = interactable;
+        interactable.Select();
+    }
+
+    public void EnableInput()
+    {
+        _input.Enable();
+    }
+
+    public void DisableInput()
+    {
+        _input.Disable();
+    }
+
+    private void TryDeselectInteractable(Collider other)
+    {
+        Interactable interactable = other.GetComponent<Interactable>();
+
+        if (interactable == null)
+            return;
+
+        if (interactable == selectedInteractable)
+        {
+            selectedInteractable.Deselect();
+            selectedInteractable = null;
+        }
     }
 }

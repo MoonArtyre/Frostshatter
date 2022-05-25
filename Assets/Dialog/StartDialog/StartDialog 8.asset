@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 105043b026eb745449e183b387c70903, type: 3}
+  m_Name: StartDialog 8
+  m_EditorClassIdentifier: 
+  speaker: {fileID: 11400000, guid: e9650e747fc514f479ee31e46dbeec11, type: 2}
+  dialogText: Sorry...
+  defaultNextDialog: {fileID: 11400000, guid: abf3a5614b1ca5a4ab709515b20fcc4e, type: 2}
+  choices: []
+  addToGameState: []
