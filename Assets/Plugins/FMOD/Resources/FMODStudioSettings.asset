@@ -58,12 +58,15 @@ MonoBehaviour:
     CallbackHandler:
       Value: {fileID: 0}
       HasValue: 0
-  outputType: 
+  OutputTypeName: 
   threadAffinities:
     Value: []
     HasValue: 0
   displaySortOrder: 0
   childIdentifiers: []
+  codecChannels:
+    Value: []
+    HasValue: 0
 --- !u!114 &-4282994828060903619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,12 +125,15 @@ MonoBehaviour:
     CallbackHandler:
       Value: {fileID: 0}
       HasValue: 0
-  outputType: 
+  OutputTypeName: 
   threadAffinities:
     Value: []
     HasValue: 0
   displaySortOrder: 0
   childIdentifiers: []
+  codecChannels:
+    Value: []
+    HasValue: 0
 --- !u!114 &-4189454598590760878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,7 +192,7 @@ MonoBehaviour:
     CallbackHandler:
       Value: {fileID: 0}
       HasValue: 0
-  outputType: 
+  OutputTypeName: 
   threadAffinities:
     Value: []
     HasValue: 0
@@ -201,6 +207,9 @@ MonoBehaviour:
   - 0f8eb3f400726694eb47beb1a9f94ce8
   - 46fbfdf3fc43db0458918377fd40293e
   - 2fea114e74ecf3c4f920e1d5cc1c4c40
+  codecChannels:
+    Value: []
+    HasValue: 0
 --- !u!114 &-2938261515449786581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,12 +268,15 @@ MonoBehaviour:
     CallbackHandler:
       Value: {fileID: 0}
       HasValue: 0
-  outputType: 
+  OutputTypeName: 
   threadAffinities:
     Value: []
     HasValue: 0
   displaySortOrder: 0
   childIdentifiers: []
+  codecChannels:
+    Value: []
+    HasValue: 0
 --- !u!114 &-2669604048537632989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,12 +335,15 @@ MonoBehaviour:
     CallbackHandler:
       Value: {fileID: 0}
       HasValue: 0
-  outputType: 
+  OutputTypeName: 
   threadAffinities:
     Value: []
     HasValue: 0
   displaySortOrder: 0
   childIdentifiers: []
+  codecChannels:
+    Value: []
+    HasValue: 0
 --- !u!114 &-1325369363902642251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -387,12 +402,15 @@ MonoBehaviour:
     CallbackHandler:
       Value: {fileID: 0}
       HasValue: 0
-  outputType: 
+  OutputTypeName: 
   threadAffinities:
     Value: []
     HasValue: 0
   displaySortOrder: 0
   childIdentifiers: []
+  codecChannels:
+    Value: []
+    HasValue: 0
 --- !u!114 &-1276852500625121421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -451,12 +469,15 @@ MonoBehaviour:
     CallbackHandler:
       Value: {fileID: 0}
       HasValue: 0
-  outputType: 
+  OutputTypeName: 
   threadAffinities:
     Value: []
     HasValue: 0
   displaySortOrder: 0
   childIdentifiers: []
+  codecChannels:
+    Value: []
+    HasValue: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -472,8 +493,8 @@ MonoBehaviour:
   SwitchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: 
-  sourceBankPath: 
+  sourceProjectPath: C:/Users/kevin/Desktop/GameDev Stuff/FmodProjects/Testing/Tests/Tests.fspro
+  sourceBankPath: C:/Users/kevin/Desktop/GameDev Stuff/FmodProjects/Testing/Tests/Build
   SourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1
@@ -495,7 +516,8 @@ MonoBehaviour:
   VirtualChannelSettings: []
   RealChannelSettings: []
   Plugins: []
-  MasterBanks: []
+  MasterBanks:
+  - Master
   Banks: []
   BanksToLoad: []
   LiveUpdatePort: 9264
@@ -507,9 +529,9 @@ MonoBehaviour:
   EnableErrorCallback: 0
   SharedLibraryUpdateStage: 0
   SharedLibraryTimeSinceStart: 0
-  CurrentVersion: 131588
+  CurrentVersion: 131591
   HideSetupWizard: 1
-  LastEventReferenceScanVersion: 0
+  LastEventReferenceScanVersion: 131591
   Platforms:
   - {fileID: -4282994828060903619}
   - {fileID: -4189454598590760878}
@@ -581,12 +603,15 @@ MonoBehaviour:
     CallbackHandler:
       Value: {fileID: 0}
       HasValue: 0
-  outputType: 
+  OutputTypeName: 
   threadAffinities:
     Value: []
     HasValue: 0
   displaySortOrder: 0
   childIdentifiers: []
+  codecChannels:
+    Value: []
+    HasValue: 0
 --- !u!114 &5266675321780433564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -645,12 +670,15 @@ MonoBehaviour:
     CallbackHandler:
       Value: {fileID: 0}
       HasValue: 0
-  outputType: 
+  OutputTypeName: 
   threadAffinities:
     Value: []
     HasValue: 0
   displaySortOrder: 0
   childIdentifiers: []
+  codecChannels:
+    Value: []
+    HasValue: 0
 --- !u!114 &6423530459953065860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -709,12 +737,15 @@ MonoBehaviour:
     CallbackHandler:
       Value: {fileID: 0}
       HasValue: 0
-  outputType: 
+  OutputTypeName: 
   threadAffinities:
     Value: []
     HasValue: 0
   displaySortOrder: 0
   childIdentifiers: []
+  codecChannels:
+    Value: []
+    HasValue: 0
 --- !u!114 &7032286286065329881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -773,9 +804,12 @@ MonoBehaviour:
     CallbackHandler:
       Value: {fileID: 0}
       HasValue: 0
-  outputType: 
+  OutputTypeName: 
   threadAffinities:
     Value: []
     HasValue: 0
   displaySortOrder: 0
   childIdentifiers: []
+  codecChannels:
+    Value: []
+    HasValue: 0
