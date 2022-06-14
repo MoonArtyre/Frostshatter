@@ -5,11 +5,13 @@ using UnityEngine.UI;
 using DG.Tweening;
 public class ChoiceButtonColorTween : MonoBehaviour
 {
-    private Image image;
+    [SerializeField]private Image image;
 
     private void Start()
     {
-        image = GetComponent<Image>();
+        if(GetComponent<Image>() != null)
+            image = GetComponent<Image>();
+
     }
 
     public void Activate()

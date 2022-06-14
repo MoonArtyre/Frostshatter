@@ -97,6 +97,10 @@ public class DialogUIManager : MonoSingleton<DialogUIManager>
 
         for (int i = 0; i < choiceAmount; i++)
         {
+            if(i == 0)
+            {
+                EventSystem.current.SetSelectedGameObject(choices[i].gameObject);
+            }
             newSequence.Append(choices[i].DOAnchorPosX(300, tweenTime, true).SetEase(easeMode));
         }
 
