@@ -25,8 +25,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform leftArm;
     [SerializeField] private Transform rightArm;
     [SerializeField] private Transform backPack;
-    
-    
+
+
     [Header("Camera")] 
     [SerializeField] private Transform cameraTarget;
 
@@ -80,6 +80,9 @@ public class PlayerController : MonoBehaviour
         _lookAction = _input.Player.Look;
         _input.Player.Sprint.started += (InputAction.CallbackContext _) => { if (moveState == MovementState.Walking)  moveState = MovementState.Running; };
         _input.Player.Sprint.canceled += (InputAction.CallbackContext _) => { if (moveState == MovementState.Running) moveState = MovementState.Walking; };
+        _input.Player.ContinueText.started += (InputAction.CallbackContext _) => { DialogUIManager.Instance.ContinueText();};
+
+        _input.Player.Glide.performed += ToggleGlide;
 
         _input.Player.Interact.performed += Interact;
 
@@ -89,8 +92,14 @@ public class PlayerController : MonoBehaviour
         _backpackOffset = affectedTransform.position - backPack.position;
 
         Application.targetFrameRate = -1;
+
     }
-    
+
+    private void Start()
+    {
+        GameManager.Instance.onPlayStateChange += ReactToPlaystateChange;
+    }
+
     private void OnEnable()
     {
         _input.Enable();
@@ -101,52 +110,102 @@ public class PlayerController : MonoBehaviour
         _input.Disable();
     }
     
+    private void ReactToPlaystateChange(GameManager.PlayState newState)
+    {
+
+        switch (newState)
+        {
+            case GameManager.PlayState.Game:
+                _input.Enable();
+                break;
+            case GameManager.PlayState.Cutscene:
+                //_input.Disable();
+                break;
+            case GameManager.PlayState.Paused:
+                //_input.Disable();
+                break;
+            default:
+                break;
+        }
+    }
 
     private void Update()
     {
+        if (GameManager.Instance.currentPlayState != GameManager.PlayState.Game)
+            return;
+
         StickToGround();
         ChangeTopSpeed();
 
         _moveInput = _moveAction.ReadValue<Vector2>();
         _lookInput = _lookAction.ReadValue<Vector2>();
-        
-        var angle = AngleToMovement();
 
-        switch (angle)
+        if (moveState != MovementState.Gliding)
         {
-            case < 30 and > -30:
-                WalkMove(_moveInput, movementSpeed);
-                RotateToInput(angle);
-                backingUp = false;
+            var angle = AngleToMovement();
 
-                break;
-            case < 90 and > -90:
-                WalkMove(_moveInput, movementSpeed / 2);
-                RotateToInput(angle);
-                backingUp = false;
+            switch (angle)
+            {
+                case < 30 and > -30:
+                    WalkMove(_moveInput, movementSpeed);
+                    RotateToInput(angle);
+                    backingUp = false;
 
-                break;
-            case < 160 and > -160:
-                BreakVelocity();
-                RotateToInput(angle);
-                backingUp = false;
+                    break;
+                case < 90 and > -90:
+                    WalkMove(_moveInput, movementSpeed / 2);
+                    RotateToInput(angle);
+                    backingUp = false;
 
-                break;
-            case < 180 and > -180:
-
-                if (Vector3.Angle(_currentVelocity, affectedTransform.forward) > 160 || _currentVelocity == Vector3.zero)
-                {
-                    WalkMove(_moveInput, - movementSpeed / 2);
-                    backingUp = true;
-                }
-                else
-                {
+                    break;
+                case < 160 and > -160:
                     BreakVelocity();
-                }
+                    RotateToInput(angle);
+                    backingUp = false;
 
-                break;
+                    break;
+                case < 180 and > -180:
+
+                    if (Vector3.Angle(_currentVelocity, affectedTransform.forward) > 160 || _currentVelocity == Vector3.zero)
+                    {
+                        WalkMove(_moveInput, -movementSpeed / 2);
+                        backingUp = true;
+                    }
+                    else
+                    {
+                        BreakVelocity();
+                    }
+
+                    break;
+            }
+
+            
         }
-        
+        else
+        {
+            WalkMove(Vector2.one, movementSpeed);
+
+            var angle = AngleToMovement();
+
+            if (_moveInput != Vector2.zero)
+            {
+                switch (angle)
+                {
+                    case > 0:
+                        affectedTransform.RotateAround(affectedTransform.position, Vector3.up, -rotationSpeed * Time.deltaTime / 10);
+
+                        break;
+                    case < 0:
+                        affectedTransform.RotateAround(affectedTransform.position, Vector3.up, rotationSpeed * Time.deltaTime / 10);
+                        break;
+                }
+            }
+
+            
+
+
+        }
+
         LeanCharacterToVelocity();
         VelocityCalc();
         MoveAttachments();
@@ -227,6 +286,8 @@ public class PlayerController : MonoBehaviour
         veloForwardMult = Mathf.Abs(veloForwardMult);
 
         if (veloForwardMult == 2) veloForwardMult = 0;
+
+            veloForwardMult *= 1.5f;
         
         if (angle > 90)
         {
@@ -265,6 +326,19 @@ public class PlayerController : MonoBehaviour
             BreakVelocity();
         }
 
+    }
+
+    private void ToggleGlide(InputAction.CallbackContext ctx)
+    {
+        if(moveState != MovementState.Gliding)
+        {
+            moveState = MovementState.Gliding;
+        }
+        else
+        {
+            moveState = MovementState.Walking;
+            _lastInput = Vector2.zero;
+        }   
     }
 
     private void VelocityCalc()
@@ -406,7 +480,7 @@ public class PlayerController : MonoBehaviour
 
     public void DisableInput()
     {
-        _input.Disable();
+       // _input.Disable();
     }
 
     private void TryDeselectInteractable(Collider other)

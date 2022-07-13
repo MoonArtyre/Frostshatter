@@ -6,6 +6,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Sirenix.OdinInspector;
 using TMPro;
+using UnityEngine.InputSystem;
+
 public class DialogUIManager : MonoSingleton<DialogUIManager>
 {
     public PlayerController playerController;
@@ -32,7 +34,7 @@ public class DialogUIManager : MonoSingleton<DialogUIManager>
     [SerializeField] private DialogScriptobject currentDialog = null;
     private List<DialogChoices> currentChoices = new List<DialogChoices>();
     private bool dialogOpen = false;
-    public AudioSource bip;
+    private bool continueDialog = false, waitingDialog = false;
 
     private void Start()
     {
@@ -45,6 +47,16 @@ public class DialogUIManager : MonoSingleton<DialogUIManager>
         CloseDialog();
         currentSequnce.Complete();
         currentSequnce.Kill();
+
+  
+
+    }
+
+    public void ContinueText()
+    {
+
+        if(waitingDialog)
+            continueDialog = true;
     }
 
     private void OpenUI()
@@ -63,7 +75,6 @@ public class DialogUIManager : MonoSingleton<DialogUIManager>
         newSequence.Append(nameArea.DOAnchorPosY(0, tweenTime, true).SetEase(easeMode));
 
         currentSequnce = newSequence;
-        newSequence.onComplete += () => { StartCoroutine(TypeText(currentDialog.dialogText)); };
         newSequence.Play();
     }
 
@@ -129,41 +140,68 @@ public class DialogUIManager : MonoSingleton<DialogUIManager>
         newSequence.Play();
     }
 
-    private IEnumerator TypeText(string textToType = "Default text, bla bla bla \nhere is some text, I'm talking here \ngoodbye", float charPerSecond = 35)
+    private IEnumerator TypeText(string dialog, float charPerSecond = 35)
     {
-        dialogText.text = "";
 
-        var charList = textToType.ToCharArray();
 
-        for (int i = 0; i < charList.Length; i++)
+            dialogText.text = "";
+
+            var charList = dialog.ToCharArray();
+
+            for (int i = 0; i < charList.Length; i++)
+            {
+                dialogText.text += charList[i];
+                if (charList[i] != '.' && charList[i] != '?' && charList[i] != '!' && charList[i] != ',')
+                    yield return new WaitForSeconds(1f / charPerSecond);
+                else
+                    yield return new WaitForSeconds(0.5f);
+            }
+
+                waitingDialog = true;
+
+
+    }
+
+    public void DialogStart(DialogScriptobject newDialog)
+    {
+        StartCoroutine(StartDialogPrompt(newDialog));
+    }
+
+    public IEnumerator StartDialogPrompt(DialogScriptobject newDialog)
+    {
+        for (int x = 0; x < newDialog.dialogText.Length; x++)
         {
-            dialogText.text += charList[i];
-            bip.pitch = Random.Range(0.7f, 1.3f);
-            bip.Play();
-            if (charList[i] != '.' && charList[i] != '?' && charList[i] != '!' && charList[i] != ',')
-                yield return new WaitForSeconds(1f / charPerSecond);
-            else
-                yield return new WaitForSeconds(0.5f);
+            GameManager.Instance.ChangePlayState(GameManager.PlayState.Cutscene);
+
+            dialogText.text = "";
+            nameText.text = CharacterManager.Instance.GetCharacterName(newDialog.dialogText[x].speaker);
+            portraitImage.sprite = newDialog.dialogText[x].speaker.image;
+
+            currentDialog = newDialog;
+
+            GameState.Instance.Add(newDialog.addToGameState);
+
+            var waitTime = 0.1f;
+            if (!dialogOpen)
+            {
+                OpenUI();
+                waitTime = 1f;
+            }
+
+            yield return new WaitForSeconds(waitTime);
+
+            StartCoroutine(TypeText(newDialog.dialogText[x].dialogText));
+
+            while (!continueDialog)
+            {
+                yield return null;
+            }
+
+            continueDialog = false;
+            waitingDialog = false;
         }
 
         DialogFinished();
-    }
-
-    public void StartDialogPrompt(DialogScriptobject newDialog)
-    {
-
-        dialogText.text = "";
-        nameText.text = CharacterManager.Instance.GetCharacterName(newDialog.speaker);
-        portraitImage.sprite = newDialog.speaker.image;
-
-        currentDialog = newDialog;
-
-        GameState.Instance.Add(newDialog.addToGameState);
-
-        if(!dialogOpen)
-            OpenUI();
-        else
-            StartCoroutine(TypeText(currentDialog.dialogText));
 
     }
 
@@ -228,7 +266,7 @@ public class DialogUIManager : MonoSingleton<DialogUIManager>
             CloseChoices();
 
             if (currentChoices[choiceMade].choiceDialog != null)
-                StartDialogPrompt(currentChoices[choiceMade].choiceDialog);
+                StartCoroutine(StartDialogPrompt(currentChoices[choiceMade].choiceDialog));
             else
                 CloseDialog();
         }
@@ -241,7 +279,7 @@ public class DialogUIManager : MonoSingleton<DialogUIManager>
     {
         if (currentDialog.defaultNextDialog != null)
         {
-            StartDialogPrompt(currentDialog.defaultNextDialog);
+            StartCoroutine(StartDialogPrompt(currentDialog.defaultNextDialog));
             CloseChoices();
         }
         else
@@ -250,6 +288,7 @@ public class DialogUIManager : MonoSingleton<DialogUIManager>
 
     private void CloseDialog()
     {
+        GameManager.Instance.ChangePlayState(GameManager.PlayState.Game);
         playerController.EnableInput();
         currentSequnce.Complete();
         currentSequnce.Kill();

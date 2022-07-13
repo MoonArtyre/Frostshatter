@@ -6,8 +6,7 @@ using Sirenix.OdinInspector;
 public class DialogScriptobject : ScriptableObject
 {
     [Header("Dialog")]
-    public CharacterObject speaker;
-    [TextArea(3,10)]public string dialogText;
+    public DialogText[] dialogText;
 
     [Header("Choices")]
     [InlineEditor]public DialogScriptobject defaultNextDialog;
@@ -23,4 +22,11 @@ public class DialogChoices
     public DialogScriptobject choiceDialog;
     public string choiceName;
     public List<State> unlockRequirements;
+}
+
+[System.Serializable]
+public class DialogText
+{
+    public CharacterObject speaker;
+    [TextArea(3, 10)] public string dialogText;
 }

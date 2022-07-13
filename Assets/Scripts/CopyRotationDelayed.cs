@@ -6,10 +6,13 @@ using UnityEngine;
 public class CopyRotationDelayed : MonoBehaviour
 {
     [SerializeField] private Transform targetTransform;
+    [SerializeField] private Vector3 rotOffset;
     [SerializeField] private float rotationSpeed;
     
     void Update()
     {
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetTransform.rotation,rotationSpeed * Time.deltaTime);
+        var rotationTarget = targetTransform.rotation.eulerAngles + rotOffset;
+        
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(rotationTarget), rotationSpeed * Time.deltaTime);
     }
 }

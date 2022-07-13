@@ -10,8 +10,9 @@ public class SetParameterByName : MonoBehaviour
     public FMODUnity.EventReference fmodEvent;
 
     [SerializeField]
-    [Range(0, 100)]
+    [Range(0, 10)]
     private float intensity;
+    public Transform distance1, distance2;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,7 @@ public class SetParameterByName : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        instance.setParameterByName("Intensity", intensity);
+        var distance = Vector3.Distance(distance1.position,distance2.position);
+        instance.setParameterByName("BreachPower", Mathf.Clamp(intensity - distance,0,10));
     }
 }
