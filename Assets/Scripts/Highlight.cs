@@ -35,6 +35,7 @@ public class Highlight : MonoBehaviour
             Material mat = renderer.material;
             mat.DOKill();
             mat.DOFloat(highlight ? 1 : 0, "_Highlight_Intensitiy",1 / highlightDuration).SetSpeedBased();
+
         }
     }
 }

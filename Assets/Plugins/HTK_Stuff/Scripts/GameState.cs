@@ -89,7 +89,8 @@ public class State
         TalkedToBreacher,
         PowerCellsCollected,
         Misc,
-        ChargeStationReady
+        ChargeStationReady,
+        SentinelFound
     }
 
     public StateID id;

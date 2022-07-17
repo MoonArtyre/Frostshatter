@@ -8,7 +8,7 @@ public class DroneMovement : MonoBehaviour
     private Vector3 goalPosition;
     private bool positionSatisifed;
     private Transform visualTransform;
-
+    float lastSearch = 0;
     [SerializeField] private float orbitRadius, droneSpeed, satisfyRadius;
     [SerializeField] private Transform orbitingObject;
     [SerializeField] private LayerMask pathCheckMask;
@@ -24,6 +24,8 @@ public class DroneMovement : MonoBehaviour
     {
         if(body.velocity != Vector3.zero)
             visualTransform.forward = Vector3.Slerp(visualTransform.forward, body.velocity, Time.deltaTime * 10);
+
+        lastSearch += Time.deltaTime;
     }
 
     void FixedUpdate()
@@ -43,6 +45,10 @@ public class DroneMovement : MonoBehaviour
 
     void searchNewPosition()
     {
+        if (lastSearch < 1f)
+            return;
+
+        lastSearch = 0;
         positionSatisifed = false;
 
         var newPosFound = false;
@@ -52,8 +58,8 @@ public class DroneMovement : MonoBehaviour
         {
             currentTries++;
 
-            goalPosition = orbitingObject.position + new Vector3(Random.Range(-1f,1f), 0, Random.Range(-1f, 1f)).normalized * orbitRadius + Vector3.up * 2;
-
+            goalPosition = orbitingObject.position + new Vector3(Random.Range(-1f,1f), 0, Random.Range(-1f, 1f)).normalized * orbitRadius + Vector3.up * 2f;
+            goalPosition += orbitingObject.forward / 2;
             var goalPosSphereCast = Physics.OverlapSphere(goalPosition,0.5f, pathCheckMask);
             Physics.Linecast(transform.position,goalPosition,out var goalPosLineCast, pathCheckMask);
 
@@ -79,11 +85,16 @@ public class DroneMovement : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, goalPosition) > satisfyRadius)
         {
-            positionSatisifed = false;
-            searchNewPosition();
+            if (positionSatisifed)
+            {
+                searchNewPosition();
+            }
         }
 
-        if (Vector3.Distance(transform.position, orbitingObject.position) > satisfyRadius * 2)
-            searchNewPosition();
+        if (Vector3.Distance(transform.position, orbitingObject.position + orbitingObject.forward) > satisfyRadius * 8f)
+        {
+
+                searchNewPosition();
+        }
     }
 }

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84fcd538d48f9ae4394c979e08f26cd8, type: 3}
-  m_Name: C-01 Satlinker
+  m_Name: kate
   m_EditorClassIdentifier: 
-  characterName: C-01 Satlinker
+  characterName: K.A.T.E
   image: {fileID: 21300000, guid: ae2247cd4b90bb449b512f8541e57614, type: 3}

@@ -140,26 +140,23 @@ public class DialogUIManager : MonoSingleton<DialogUIManager>
         newSequence.Play();
     }
 
-    private IEnumerator TypeText(string dialog, float charPerSecond = 35)
+    private IEnumerator TypeText(string dialog)
     {
+        dialogText.text = "";
 
+        var charList = dialog.ToCharArray();
+        var charPerSecond = 35f;
 
-            dialogText.text = "";
+        for (int i = 0; i < charList.Length; i++)
+        {
+            dialogText.text += charList[i];
+            if (charList[i] != '.' && charList[i] != '?' && charList[i] != '!' && charList[i] != ',')
+                yield return new WaitForSeconds(1f / charPerSecond);
+            else
+                yield return new WaitForSeconds(0.5f);
+        }
 
-            var charList = dialog.ToCharArray();
-
-            for (int i = 0; i < charList.Length; i++)
-            {
-                dialogText.text += charList[i];
-                if (charList[i] != '.' && charList[i] != '?' && charList[i] != '!' && charList[i] != ',')
-                    yield return new WaitForSeconds(1f / charPerSecond);
-                else
-                    yield return new WaitForSeconds(0.5f);
-            }
-
-                waitingDialog = true;
-
-
+            waitingDialog = true;
     }
 
     public void DialogStart(DialogScriptobject newDialog)

@@ -93,6 +93,7 @@ public class PlayerController : MonoBehaviour
 
         Application.targetFrameRate = -1;
 
+        ReferenceManager.Instance.playerRef = affectedTransform;
     }
 
     private void Start()
