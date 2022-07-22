@@ -3,54 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-
+using Cinemachine;
 public class GameManager : MonoSingleton<GameManager>
 {
-    /*
-    private Old_PlayerController _player;
-
-    private DialogUIManager _dialogUIManager;
-
-    private void OnEnable()
-    {
-        DialogUIManager.DialogClosed += EndDialog;
-
-    }
-
-    private void OnDisable()
-    {
-        DialogUIManager.DialogClosed -= EndDialog;
-
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        _player = FindObjectOfType<Old_PlayerController>();
-        
-        if(_player == null) Debug.LogError("No Player could be found");
-        _dialogUIManager = DialogUIManager.Instance;
-        EnterPlayMode();
-    }
-
-    private void EnterPlayMode()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        _player.EnableInput();
-    }
-
-    public void StartDialogue(Dialog dialog)
-    {
-        Cursor.lockState = CursorLockMode.None;
-        _dialogUIManager.StartDialog(dialog);
-        _player.DisableInput();
-    }
-
-    private void EndDialog(Dialog _)
-    {
-        EnterPlayMode();
-    }*/
-
+    
     public enum PlayState
     {
         Game,
@@ -60,7 +16,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     public PlayState currentPlayState;
     public Action<PlayState> onPlayStateChange;
-
+    public CinemachineVirtualCamera currentCutsceneCam;
     public void ChangePlayState(PlayState newPlayState)
     {
         currentPlayState = newPlayState;
@@ -82,6 +38,21 @@ public class GameManager : MonoSingleton<GameManager>
                 Cursor.lockState = CursorLockMode.None;
                 Time.timeScale = 0;
                 break;
+        }
+    }
+
+    public void SetCutsceneCam(CinemachineVirtualCamera newCam)
+    {
+        currentCutsceneCam = newCam;
+        currentCutsceneCam.Priority = 15;
+    }
+
+    public void Update()
+    {
+        if(currentPlayState == PlayState.Game)
+        {
+            if(currentCutsceneCam != null)
+                currentCutsceneCam.Priority = 0;
         }
     }
 }

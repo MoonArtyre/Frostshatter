@@ -35,6 +35,8 @@ public class DialogUIManager : MonoSingleton<DialogUIManager>
     private List<DialogChoices> currentChoices = new List<DialogChoices>();
     private bool dialogOpen = false;
     private bool continueDialog = false, waitingDialog = false;
+    public FMODUnity.EventReference talkSoundReference;
+    private FMOD.Studio.EventInstance talkSound;
 
     private void Start()
     {
@@ -47,8 +49,9 @@ public class DialogUIManager : MonoSingleton<DialogUIManager>
         CloseDialog();
         currentSequnce.Complete();
         currentSequnce.Kill();
+        talkSound = FMODUnity.RuntimeManager.CreateInstance(talkSoundReference);
 
-  
+
 
     }
 
@@ -150,6 +153,7 @@ public class DialogUIManager : MonoSingleton<DialogUIManager>
         for (int i = 0; i < charList.Length; i++)
         {
             dialogText.text += charList[i];
+            talkSound.start();
             if (charList[i] != '.' && charList[i] != '?' && charList[i] != '!' && charList[i] != ',')
                 yield return new WaitForSeconds(1f / charPerSecond);
             else

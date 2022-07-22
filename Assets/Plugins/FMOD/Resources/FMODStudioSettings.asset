@@ -496,7 +496,7 @@ MonoBehaviour:
   sourceProjectPath: C:/Users/kevin/Desktop/GameDev Stuff/FmodProjects/FrostShatter/FrostShatterBanks/FrostShatterBanks.fspro
   sourceBankPath: C:/Users/kevin/Desktop/GameDev Stuff/FmodProjects/FrostShatter/FrostShatterBanks/Build
   SourceBankPathUnformatted: 
-  BankRefreshCooldown: 5
+  BankRefreshCooldown: 1
   ShowBankRefreshWindow: 1
   AutomaticEventLoading: 1
   BankLoadType: 0

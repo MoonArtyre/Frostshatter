@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 105043b026eb745449e183b387c70903, type: 3}
+  m_Name: Discovery
+  m_EditorClassIdentifier: 
+  dialogText:
+  - speaker: {fileID: 11400000, guid: e9650e747fc514f479ee31e46dbeec11, type: 2}
+    dialogText: 'Wow, are these the thrusters of Zelotzich?
+
+'
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: 'Let me do a quick scan. But yes, these are thrusters of some kind.
+
+'
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: ...
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: 'Scan complete, These appear to be the Main thruster arrays of the
+      Krazanti-Destroyer.
+
+'
+  - speaker: {fileID: 11400000, guid: e9650e747fc514f479ee31e46dbeec11, type: 2}
+    dialogText: 'So they''re not thrusters from our ship Zelotzich?
+
+'
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: 'No, these seem to be part of the Krazanti destroyers that escorted
+      us...
+
+'
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: 'So not even they made it out alive...
+
+'
+  - speaker: {fileID: 11400000, guid: e9650e747fc514f479ee31e46dbeec11, type: 2}
+    dialogText: 'How many were there?
+
+'
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: 'You mean destroyers in our fleet?
+
+'
+  - speaker: {fileID: 11400000, guid: e9650e747fc514f479ee31e46dbeec11, type: 2}
+    dialogText: 'Yes, how many destroyers escorted us?
+
+'
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: 'Well, there were two that escorted us in close proximity...
+
+'
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: ' I don''t know much more than that, The military strength is not
+      something under my clearance.'
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: ' I however know that there was a QRF force nearby, though I wasn''t
+      informed of its strength.'
+  - speaker: {fileID: 11400000, guid: e9650e747fc514f479ee31e46dbeec11, type: 2}
+    dialogText: Why don't you know that? You're the AI of the Capital ship in this
+      fleet, shouldn't you know what's happening in your fleet?
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: ' It''s more complex than that. Zelotzich was under Research Control,
+      while everything else in the fleet was under Military Control.'
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: The Research and Military forces are highly seperated for... reasons.
+  - speaker: {fileID: 11400000, guid: e9650e747fc514f479ee31e46dbeec11, type: 2}
+    dialogText: This doesn't make sense.
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: It does, from a certain perspective, though I'm not allowed to disclose
+      any intel about that.
+  - speaker: {fileID: 11400000, guid: e9650e747fc514f479ee31e46dbeec11, type: 2}
+    dialogText: ok... So under what control do I fall?
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: 'Neither, for the time being you''re an independent variable. '
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: While it's true that you're under Research supervision, there is
+      no Control force on you yet.
+  - speaker: {fileID: 11400000, guid: e9650e747fc514f479ee31e46dbeec11, type: 2}
+    dialogText: Huh, ok... Let's move on, this seems all to complicated and irrelevant.
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: 'Noted.
+
+'
+  defaultNextDialog: {fileID: 0}
+  choices: []
+  addToGameState:
+  - id: 11
+    amount: 1

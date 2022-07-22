@@ -21,19 +21,19 @@ MonoBehaviour:
   - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
     dialogText: There is also the door to the escape pod, but where's the pod?
   - speaker: {fileID: 11400000, guid: e9650e747fc514f479ee31e46dbeec11, type: 2}
-    dialogText: Is it this pod up there?
+    dialogText: It's probably close
   - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
-    dialogText: Indeed, it is.
+    dialogText: ...
   - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
     dialogText: Quick scan complete, this is Sentinel, their body has been completely
       destroyed from blunt trauma. All internal system are either damaged beyond
       repair, or not responsive anymore.
   - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
     dialogText: There also is no energy fluid or coolant anymore, they are effectively
-      dead here. Blackbox and Core are still intact though.
+      dead here... but at least their core is still intact.
   - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
-    dialogText: 'We could save their core and replace their body once we get of this
-      planet. However we can''t do that.
+    dialogText: 'We could save their core and replace their body if we can get off
+      this planet. However, we can''t extract Sentinels core.
 
 '
   - speaker: {fileID: 11400000, guid: e9650e747fc514f479ee31e46dbeec11, type: 2}
@@ -43,16 +43,20 @@ MonoBehaviour:
       that is not under Military control will immediately Corrupt and destroy all
       data.
   - speaker: {fileID: 11400000, guid: e9650e747fc514f479ee31e46dbeec11, type: 2}
-    dialogText: 'Is there something we can do?
+    dialogText: 'Oh no, Is there something we can do?
 
 '
   - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
-    dialogText: No, however Chaperone could still be around, they should be able
-      to extract Sentinels core.
+    dialogText: No... Unless we can find someone who's also under Military Control.
   - speaker: {fileID: 11400000, guid: e9650e747fc514f479ee31e46dbeec11, type: 2}
-    dialogText: Great, then let's talk to them!
+    dialogText: Oh, I'm sure we can find someone.
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: We can't afford to take unecessary detours though. It's not our mission
+      to save them.
+  - speaker: {fileID: 11400000, guid: e9650e747fc514f479ee31e46dbeec11, type: 2}
+    dialogText: ...
   defaultNextDialog: {fileID: 0}
   choices: []
   addToGameState:
-  - id: 0
-    amount: 0
+  - id: 4
+    amount: 1

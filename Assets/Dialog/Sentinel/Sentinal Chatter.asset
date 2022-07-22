@@ -10,21 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 105043b026eb745449e183b387c70903, type: 3}
-  m_Name: StartDialog
+  m_Name: Sentinal Chatter
   m_EditorClassIdentifier: 
   dialogText:
   - speaker: {fileID: 11400000, guid: e9650e747fc514f479ee31e46dbeec11, type: 2}
-    dialogText: Where am I?
+    dialogText: I will find someone, I promise.
   - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
-    dialogText: fasfhoahfeih Test dialog!!!.. fajfwpjae
+    dialogText: They can't hear you.
   - speaker: {fileID: 11400000, guid: e9650e747fc514f479ee31e46dbeec11, type: 2}
-    dialogText: Oh no
-  defaultNextDialog: {fileID: 11400000, guid: d6a07373aaf81274397eb7d1e633c71e, type: 2}
-  choices:
-  - choiceDialog: {fileID: 11400000, guid: 10040ae566853a4469ad692168bc644d, type: 2}
-    choiceName: So yes,
-    unlockRequirements: []
-  - choiceDialog: {fileID: 11400000, guid: 42b8e1ff76f80f44fa4e13eaebbea4f2, type: 2}
-    choiceName: So no
-    unlockRequirements: []
+    dialogText: I know.
+  defaultNextDialog: {fileID: 0}
+  choices: []
   addToGameState: []

@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 105043b026eb745449e183b387c70903, type: 3}
+  m_Name: Zelotzich Destruction
+  m_EditorClassIdentifier: 
+  dialogText:
+  - speaker: {fileID: 11400000, guid: e9650e747fc514f479ee31e46dbeec11, type: 2}
+    dialogText: 'How did Zelotzich get destroyed like that?
+
+'
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: 'We don''t know. While not designed for combat, Zelotzich should
+      not have been able to be destroyed this easily.
+
+'
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: 'Zelotzich is... was the Pride of the Research control. An Entire
+      city worth of researchers and equipment all in a self sustaining Capital ship.
+
+'
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: 'Even it''s shield reactors were one of the best, they should''ve
+      been able to withstand even a Capital-class broadside without breaking.
+
+'
+  - speaker: {fileID: 11400000, guid: e9650e747fc514f479ee31e46dbeec11, type: 2}
+    dialogText: 'Wow, sounds powerful.
+
+'
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: 'It was, but somehow, whatever shot at us from this planet, managed
+      to not only destroy the entire shield in one hit, it also pierced through our
+      Armor like it''s nothing.
+
+'
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: 'Whatever resides on this planet, it is scarier than anything we''ve
+      ever encountered.
+
+'
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: 'We couldn''t even identify... what was shooting at us. We have nothing,
+      no data or anything.
+
+'
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: 'This isn''t supposed to happend, this shouldn''t be able to happen.
+      Our knowledge is incomplete. It''s...
+
+'
+  - speaker: {fileID: 11400000, guid: e9650e747fc514f479ee31e46dbeec11, type: 2}
+    dialogText: 'Let''s not focus on that, we should just try to escape this planet.
+
+'
+  - speaker: {fileID: 11400000, guid: e9650e747fc514f479ee31e46dbeec11, type: 2}
+    dialogText: ' I shouldn''t have asked...'
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: 'No, Asking questions is right...
+
+'
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: But let's just go, I don't have the equipment to research this.
+  defaultNextDialog: {fileID: 0}
+  choices: []
+  addToGameState: []

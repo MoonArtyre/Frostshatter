@@ -10,21 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 105043b026eb745449e183b387c70903, type: 3}
-  m_Name: StartDialog
+  m_Name: Chatter 2
   m_EditorClassIdentifier: 
   dialogText:
   - speaker: {fileID: 11400000, guid: e9650e747fc514f479ee31e46dbeec11, type: 2}
-    dialogText: Where am I?
+    dialogText: The tail piece also looks pretty healthy.
   - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
-    dialogText: fasfhoahfeih Test dialog!!!.. fajfwpjae
+    dialogText: 'From the looks of it there was only one explosion at the center
+      fuselage of the shuttle. '
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: The rest of the damage seems to be from crashing down.
   - speaker: {fileID: 11400000, guid: e9650e747fc514f479ee31e46dbeec11, type: 2}
-    dialogText: Oh no
-  defaultNextDialog: {fileID: 11400000, guid: d6a07373aaf81274397eb7d1e633c71e, type: 2}
-  choices:
-  - choiceDialog: {fileID: 11400000, guid: 10040ae566853a4469ad692168bc644d, type: 2}
-    choiceName: So yes,
-    unlockRequirements: []
-  - choiceDialog: {fileID: 11400000, guid: 42b8e1ff76f80f44fa4e13eaebbea4f2, type: 2}
-    choiceName: So no
-    unlockRequirements: []
+    dialogText: ok...
+  defaultNextDialog: {fileID: 0}
+  choices: []
   addToGameState: []

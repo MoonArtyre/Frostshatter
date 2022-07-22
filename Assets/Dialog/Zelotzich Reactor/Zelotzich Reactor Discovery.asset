@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 105043b026eb745449e183b387c70903, type: 3}
+  m_Name: Zelotzich Reactor Discovery
+  m_EditorClassIdentifier: 
+  dialogText:
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: 'I''m reading some high energy signatures of this ship chunk...
+
+      Let
+      me scan this real quick.
+
+'
+  - speaker: {fileID: 11400000, guid: e9650e747fc514f479ee31e46dbeec11, type: 2}
+    dialogText: 'Sure, looks like another giant ship piece.
+
+'
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: 'Half of my sensor scanning is reflected of this energy source. But
+      from what I can read here... this appears to be an Auxilliary reactor of Zelotzich.
+
+'
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: 'Its completely overloaded and overheated though. Impressive that
+      it''s still running...
+
+'
+  - speaker: {fileID: 11400000, guid: e9650e747fc514f479ee31e46dbeec11, type: 2}
+    dialogText: 'Wait, there is an entire reactor running in there?
+
+'
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: 'Auxilliary reactor, It''s small, and more for emergency power boosts
+      than to actually power the ship, but yes, it''s running.
+
+'
+  - speaker: {fileID: 11400000, guid: e9650e747fc514f479ee31e46dbeec11, type: 2}
+    dialogText: 'Why is it running? Is something still active in there?
+
+'
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: 'Can''t get a read on that, but seems like it''s just out of control
+
+'
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: ...
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: 'I''m connected.... Ok, shutting it down now... let''s see what else
+      is in here.
+
+'
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: ...
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: 'Nothing of use to us here, but we can salvage the reactor for our
+      shuttle. That would be our power core taken care of.
+
+'
+  - speaker: {fileID: 11400000, guid: e9650e747fc514f479ee31e46dbeec11, type: 2}
+    dialogText: 'Well that sounds good. '
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: 'I''m marking this reactor, we can come back here later to salvage
+      it. '
+  defaultNextDialog: {fileID: 0}
+  choices: []
+  addToGameState:
+  - id: 9
+    amount: 1

@@ -1,0 +1,218 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 105043b026eb745449e183b387c70903, type: 3}
+  m_Name: HomeShuttle Dicovery
+  m_EditorClassIdentifier: 
+  dialogText:
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: 'Look at that, this is one of the reconnaissance shuttles.
+
+'
+  - speaker: {fileID: 11400000, guid: e9650e747fc514f479ee31e46dbeec11, type: 2}
+    dialogText: 'Looks pretty broken.
+
+'
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: 'During the evacuation they were designated to extract HVTs. A target
+      this small was expected to make it out of the combat zone without any problems.
+
+'
+  - speaker: {fileID: 11400000, guid: e9650e747fc514f479ee31e46dbeec11, type: 2}
+    dialogText: ...This sounds like bad news.
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: 'We can''t know that. Let me scan this shuttle, I will extract all
+      necessary data.
+
+'
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: ...
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: 'Superficial scans reveal a passive signature still in working order.
+      This ship is still functional.
+
+'
+  - speaker: {fileID: 11400000, guid: e9650e747fc514f479ee31e46dbeec11, type: 2}
+    dialogText: 'This... this does not look functional.
+
+'
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: 'Connecting to board computer...
+
+'
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: 'Connection established.
+
+'
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: 'Shuttle is in hibernation with EM-Power keeping it''s core alive.
+
+'
+  - speaker: {fileID: 11400000, guid: e9650e747fc514f479ee31e46dbeec11, type: 2}
+    dialogText: In hibernation?
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: It uses minimal power to survive and preserve itself for as long
+      as possible. It is default protocol to enter hibernation in case no other options
+      seem viable.
+  - speaker: {fileID: 11400000, guid: e9650e747fc514f479ee31e46dbeec11, type: 2}
+    dialogText: 'Right.
+
+'
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: 'We can reactivate this shuttle. This may prove useful to our cause.
+
+'
+  - speaker: {fileID: 11400000, guid: e9650e747fc514f479ee31e46dbeec11, type: 2}
+    dialogText: 'sure, do that. That won''t do any damage though, right?
+
+'
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: 'It may shutdown completely, effectively killing its core.
+
+'
+  - speaker: {fileID: 11400000, guid: e9650e747fc514f479ee31e46dbeec11, type: 2}
+    dialogText: 'uhm..
+
+'
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: I advice proceeding with this reactivation. In its current state
+      this shuttle is deemed KIA, per protocol this means extracting its blackbox,
+      this also kills its core.
+  - speaker: {fileID: 11400000, guid: e9650e747fc514f479ee31e46dbeec11, type: 2}
+    dialogText: Why can't we extract it's core aswell and save it?
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: Its not alive, there is no core worth extracting. The core of small
+      ships are lesser-AI, Unlike us it does not have the capabilities of consciousness.
+  - speaker: {fileID: 11400000, guid: e9650e747fc514f479ee31e46dbeec11, type: 2}
+    dialogText: 'sure sure, go ahead then. Please save it.
+
+'
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: 'Don''t worry. Reactivating now...
+
+'
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: 'It''s taking some time, the reactor is damaged, all power is drawn
+      from emergency capacitors.
+
+'
+  - speaker: {fileID: 11400000, guid: b500383594261d642a5c546019f50ae5, type: 2}
+    dialogText: 'Welcome aboard pilot! Where will our journey lead us today?
+
+'
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: 'Reactivation finished. Core, commence full scan of internal systems.
+
+'
+  - speaker: {fileID: 11400000, guid: b500383594261d642a5c546019f50ae5, type: 2}
+    dialogText: 'Will do pilot!
+
+'
+  - speaker: {fileID: 11400000, guid: b500383594261d642a5c546019f50ae5, type: 2}
+    dialogText: 'Thrusters 2 - Unresponsive; Thruster 1 - Highly damaged; I do not
+      recommend flying today pilot!
+
+'
+  - speaker: {fileID: 11400000, guid: b500383594261d642a5c546019f50ae5, type: 2}
+    dialogText: 'Reactor - Not available; This is dangerous pilot! We will shut down
+      if we aren''t supplied with power.
+
+'
+  - speaker: {fileID: 11400000, guid: b500383594261d642a5c546019f50ae5, type: 2}
+    dialogText: 'Capacitors - 1,2,3 - Currently discharging power; Power deficiency
+      detected. Increase reactor output or decrease power usage pilot!
+
+'
+  - speaker: {fileID: 11400000, guid: b500383594261d642a5c546019f50ae5, type: 2}
+    dialogText: 'Capacitors - 4 - Unresponsive; Please check if Capacitors - 4 is
+      connected to the circuit.
+
+'
+  - speaker: {fileID: 11400000, guid: b500383594261d642a5c546019f50ae5, type: 2}
+    dialogText: 'Life support - Critical; You will not be able to survive the outer
+      space pilot!
+
+'
+  - speaker: {fileID: 11400000, guid: e9650e747fc514f479ee31e46dbeec11, type: 2}
+    dialogText: 'This ship is kind of annoying.
+
+'
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: 'Sorry, I''m not responsible for the personality type that the previous
+      owner has chosen.
+
+'
+  - speaker: {fileID: 11400000, guid: b500383594261d642a5c546019f50ae5, type: 2}
+    dialogText: 'Flight Controls - Online and ready for takeoff pilot!
+
+'
+  - speaker: {fileID: 11400000, guid: e9650e747fc514f479ee31e46dbeec11, type: 2}
+    dialogText: I doubt that its ready for takeoff.
+  - speaker: {fileID: 11400000, guid: b500383594261d642a5c546019f50ae5, type: 2}
+    dialogText: 'pressurization- N/A; Ship is not able to pressurize. It is not safe
+      to take your EVA suit off outside of nominal pressure levels pilot!
+
+'
+  - speaker: {fileID: 11400000, guid: b500383594261d642a5c546019f50ae5, type: 2}
+    dialogText: 'Radar - Unresponsive; Error!
+
+'
+  - speaker: {fileID: 11400000, guid: b500383594261d642a5c546019f50ae5, type: 2}
+    dialogText: 'Error! Please seek a ship mechanic!
+
+'
+  - speaker: {fileID: 11400000, guid: b500383594261d642a5c546019f50ae5, type: 2}
+    dialogText: 'Internal scan complete pilot!
+
+'
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: 'Alright, we need thrusters and a reactor to repair the internals
+      here. This might prove easy with all the scrap around here.
+
+'
+  - speaker: {fileID: 11400000, guid: e9650e747fc514f479ee31e46dbeec11, type: 2}
+    dialogText: 'Okay, but what about the completely destroyed hull of the shuttle?
+
+'
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: 'The hull is not necessary for our survival. We do not need life
+      support or pressurized internals.
+
+'
+  - speaker: {fileID: 11400000, guid: e9650e747fc514f479ee31e46dbeec11, type: 2}
+    dialogText: 'eh... I guess you''re right?
+
+'
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: 'Getting you outside this combat area is our highest priority, this
+      shuttle will prove to be our best option.
+
+'
+  - speaker: {fileID: 11400000, guid: e9650e747fc514f479ee31e46dbeec11, type: 2}
+    dialogText: 'ok, I agree. What do we need?
+
+'
+  - speaker: {fileID: 11400000, guid: 924e6f549f725f047a49269d2ee65f7d, type: 2}
+    dialogText: 'New thruster, thruster fuel, intel of our current position, a starmap,
+      a new shuttle wing, and a new reactor, should be the minimal requirements to
+      leave this planet.
+
+'
+  - speaker: {fileID: 11400000, guid: e9650e747fc514f479ee31e46dbeec11, type: 2}
+    dialogText: 'Ah yes, sounds all like things we can find on the aftermaths of
+      a battlefield... Oh well, I agree with the plan, let''s do this.
+
+'
+  defaultNextDialog: {fileID: 0}
+  choices: []
+  addToGameState:
+  - id: 10
+    amount: 1

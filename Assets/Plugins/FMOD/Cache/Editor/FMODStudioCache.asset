@@ -51,7 +51,8 @@ MonoBehaviour:
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
-  Parameters: []
+  Parameters:
+  - {fileID: 4823929146984146351}
   MinDistance: 1
   MaxDistance: 20
   Length: 185664
@@ -101,13 +102,41 @@ MonoBehaviour:
   - {fileID: 3758651175911132706}
   - {fileID: -6461166736440128165}
   - {fileID: 3083691494540169326}
+  - {fileID: 171550643050538995}
   EditorParameters: []
   MasterBanks:
   - {fileID: 848639910122717113}
   StringsBanks:
   - {fileID: 2112239153090857227}
-  cacheTime: 637935879269808348
+  cacheTime: 637938414533243371
   cacheVersion: 131591
+--- !u!114 &171550643050538995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/GenericTextSpeech
+  m_EditorClassIdentifier: 
+  Path: event:/GenericTextSpeech
+  Guid:
+    Data1: -481933262
+    Data2: 1152988694
+    Data3: -1212421743
+    Data4: 864685891
+  Banks:
+  - {fileID: 848639910122717113}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &662306467516759507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,10 +176,10 @@ MonoBehaviour:
   Path: C:/Users/kevin/Desktop/GameDev Stuff/FmodProjects/FrostShatter/FrostShatterBanks/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637935879269788426
+  lastModified: 637938414533233402
   FileSizes:
   - Name: Desktop
-    Value: 18338176
+    Value: 18343040
   Exists: 1
 --- !u!114 &2112239153090857227
 MonoBehaviour:
@@ -167,10 +196,10 @@ MonoBehaviour:
   Path: C:/Users/kevin/Desktop/GameDev Stuff/FmodProjects/FrostShatter/FrostShatterBanks/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637935879269808348
+  lastModified: 637938414533243371
   FileSizes:
   - Name: Desktop
-    Value: 1178
+    Value: 1226
   Exists: 1
 --- !u!114 &3083691494540169326
 MonoBehaviour:
@@ -195,7 +224,8 @@ MonoBehaviour:
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
-  Parameters: []
+  Parameters:
+  - {fileID: 6701612440646593240}
   MinDistance: 1
   MaxDistance: 20
   Length: 161406
@@ -227,6 +257,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 112000
+--- !u!114 &4823929146984146351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/HomeHopeMusic/Strength
+  m_EditorClassIdentifier: 
+  Name: Strength
+  StudioPath: 
+  Min: 0
+  Max: 10
+  Default: 0
+  ID:
+    data1: 3223592047
+    data2: 1269908729
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &4978591118290231992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,10 +304,35 @@ MonoBehaviour:
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
-  Parameters: []
+  Parameters:
+  - {fileID: 5624649199277430624}
   MinDistance: 1
   MaxDistance: 20
   Length: 207048
+--- !u!114 &5624649199277430624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/WorldMusic/Strength
+  m_EditorClassIdentifier: 
+  Name: Strength
+  StudioPath: 
+  Min: 0
+  Max: 10
+  Default: 0
+  ID:
+    data1: 3223592047
+    data2: 1269908729
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &5904069509252602477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,6 +344,30 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
   m_Name: parameter:/ExplorationMusic/Strength
+  m_EditorClassIdentifier: 
+  Name: Strength
+  StudioPath: 
+  Min: 0
+  Max: 10
+  Default: 0
+  ID:
+    data1: 3223592047
+    data2: 1269908729
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &6701612440646593240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/AdventureMusic/Strength
   m_EditorClassIdentifier: 
   Name: Strength
   StudioPath: 

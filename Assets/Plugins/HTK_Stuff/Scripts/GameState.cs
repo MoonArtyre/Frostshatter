@@ -90,7 +90,14 @@ public class State
         PowerCellsCollected,
         Misc,
         ChargeStationReady,
-        SentinelFound
+        SentinelFound,
+        IntelCollected,
+        ShuttleWingFound,
+        NewThrustersCollected,
+        ThrusterFuelFound,
+        PowerSourceFound,
+        ShuttleFound,
+        ThrusterWreckFound
     }
 
     public StateID id;

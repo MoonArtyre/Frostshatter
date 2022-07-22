@@ -444,6 +444,9 @@ public class PlayerController : MonoBehaviour
 
     private void Interact(InputAction.CallbackContext ctx)
     {
+        if (GameManager.Instance.currentPlayState != GameManager.PlayState.Game)
+            return;
+
         if (selectedInteractable != null)
         {
             selectedInteractable.Interact();
